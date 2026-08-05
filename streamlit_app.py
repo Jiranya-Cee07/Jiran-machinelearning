@@ -62,38 +62,32 @@ with tab2:
         font-size:14px;
     }
 
-    .note-table th{
-        background:#f2f2f2;
-        text-align:center;
-        padding:10px;
-        border:1px solid #ddd;
-    }
-
+    .note-table th,
     .note-table td{
-        padding:10px;
         border:1px solid #ddd;
+        padding:10px;
         vertical-align:top;
     }
 
-    .note-table td:first-child{
-        width:120px;
-        font-weight:bold;
+    .note-table th{
+        background:#f5f5f5;
     }
     </style>
 
     <table class="note-table">
+
         <tr>
             <th>ชื่อตัวแปร</th>
             <th>ความหมาย</th>
         </tr>
 
         <tr>
-            <td>age</td>
+            <td><b>age</b></td>
             <td>อายุ (ปี)</td>
         </tr>
 
         <tr>
-            <td>sex</td>
+            <td><b>sex</b></td>
             <td>
                 เพศ<br>
                 1 = ชาย<br>
@@ -102,7 +96,7 @@ with tab2:
         </tr>
 
         <tr>
-            <td>cp</td>
+            <td><b>cp</b></td>
             <td>
                 ประเภทของอาการเจ็บหน้าอก<br>
                 0 = Typical Angina<br>
@@ -112,7 +106,6 @@ with tab2:
             </td>
         </tr>
 
-        <!-- เพิ่มแถวอื่น ๆ ต่อได้ -->
-
     </table>
+
     """, unsafe_allow_html=True)
