@@ -94,6 +94,17 @@ with st.sidebar:
     thal = st.selectbox('ผลการตรวจ Thalassemia/Thallium Stress Test(thal)',('ข้อมูลผิดพลาดหรือไม่มีข้อมูล','ผิดปกติแบบคงที่','ปกติ (Normal)','ผิดปกติที่สามารถกลับคืนได้ (Reversible Defect)'))
     
 
+    if st.button("❤️ ทำนายผล"):
+
+    prediction = model.predict(input_df)
+
+    if prediction[0] == 1:
+        st.error("⚠️ ผลทำนาย : มีความเสี่ยงโรคหัวใจ")
+
+    else:
+        st.success("✅ ผลทำนาย : ไม่มีความเสี่ยงโรคหัวใจ")
+
+
 Sex = 1 if Sex == "ชาย" else 0
 
 
@@ -156,24 +167,7 @@ data = {
 input_df = pd.DataFrame([data])
 
 
-# แสดงข้อมูลที่ส่งเข้าโมเดล
-st.subheader("📋 Input Data")
-st.dataframe(input_df)
 
-
-# -------------------------------
-# ทำนายผล
-# -------------------------------
-
-if st.button("❤️ ทำนายผล"):
-
-    prediction = model.predict(input_df)
-
-    if prediction[0] == 1:
-        st.error("⚠️ ผลทำนาย : มีความเสี่ยงโรคหัวใจ")
-
-    else:
-        st.success("✅ ผลทำนาย : ไม่มีความเสี่ยงโรคหัวใจ")
 
 
 
