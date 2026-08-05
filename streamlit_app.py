@@ -53,59 +53,20 @@ with tab1:
 # -------------------------------
 with tab2:
 
-    st.markdown("""
-    <style>
-    .note-table{
-        width:75%;
-        margin:auto;
-        border-collapse:collapse;
-        font-size:14px;
-    }
-
-    .note-table th,
-    .note-table td{
-        border:1px solid #ddd;
-        padding:10px;
-        vertical-align:top;
-    }
-
-    .note-table th{
-        background:#f5f5f5;
-    }
-    </style>
-
-    <table class="note-table">
-
-        <tr>
-            <th>ชื่อตัวแปร</th>
-            <th>ความหมาย</th>
-        </tr>
-
-        <tr>
-            <td><b>age</b></td>
-            <td>อายุ (ปี)</td>
-        </tr>
-
-        <tr>
-            <td><b>sex</b></td>
-            <td>
-                เพศ<br>
-                1 = ชาย<br>
-                0 = หญิง
-            </td>
-        </tr>
-
-        <tr>
-            <td><b>cp</b></td>
-            <td>
-                ประเภทของอาการเจ็บหน้าอก<br>
-                0 = Typical Angina<br>
-                1 = Atypical Angina<br>
-                2 = Non-anginal Pain<br>
-                3 = Asymptomatic
-            </td>
-        </tr>
-
-    </table>
-
-    """, unsafe_allow_html=True)
+    with st.expander("📝 ดูคำอธิบายตัวแปร"):
+    st.write("""
+    - Age: อายุ
+    - Sex: เพศ (1 = ชาย 0 = หญิง)
+    - cp: อาการเจ็บหน้าอก (0 = ทั่วไป 1 = ไม่ทั่วไป 2 = ไม่ใช่จากโรคหัวใจ 3 = ไม่มีอาการ)
+    - trestbps: ความดันโลหิตขณะพัก (mmHg) 
+    - chol: ระดับคอเลสเตอรอลในเลือด (mg/dL)
+    - fbs: ระดับน้ำตาลในเลือดหลังอดอาหาร (1 = มากกว่า 120 mg/dL 0 = ไม่เกิน 120 mg/dL)
+    - restecg: ผลการตรวจคลื่นไฟฟ้าหัวใจขณะพัก (0 = ปกติ 1 = มีความผิดปกติของคลื่น ST-T 2 = มีภาวะหัวใจห้องล่างซ้ายโต)
+    - thalach: อัตราการเต้นของหัวใจสูงสุดที่วัดได้ 
+    - exang: อาการเจ็บหน้าอกจากการออกกำลังกาย (1 = มี 0 = ไม่มี)
+    - oldpeak: ระดับการลดลงของช่วง ST ที่เกิดจากการออกกำลังกายเมื่อเทียบกับขณะพัก
+    - slope: ลักษณะความชันของช่วง ST ขณะออกกำลังกายสูงสุด (0 = ชันขึ้น 1 = ราบ 2 = ชันลง)
+    - ca: จำนวนหลอดเลือดหัวใจหลัก ที่ตรวจพบด้วยการฉีดสี มีค่า 0–3
+    - thal: ผลการตรวจ Thalassemia/Thallium Stress Test (0 = ข้อมูลผิดพลาดหรือไม่มีข้อมูล 1 = ความผิดปกติแบบคงที่ 2 = ปกติ 3 = ความผิดปกติที่สามารถกลับคืนได้)
+    - target: ตัวแปรเป้าหมาย สำหรับการทำนาย (0 = ไม่เป็นโรคหัวใจ 1 = เป็นโรคหัวใจ)
+    """)
