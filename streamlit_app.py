@@ -156,9 +156,11 @@ data = {
     'thal': thal
 }
 
+input_df = pd.DataFrame([data])
+
 if predict_btn:
 
-    prediction = model.predict(data)
+    prediction = model.predict(input_df)
 
     if prediction[0] == 1:
         st.error("⚠️ มีความเสี่ยงโรคหัวใจ")
