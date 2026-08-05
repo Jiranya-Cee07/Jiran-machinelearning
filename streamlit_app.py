@@ -77,9 +77,9 @@ st.write(dt.describe())
 
 with st.sidebar:
     st.header('รับข้อมูล')
-    อายุ = st.slider('อายุ(ปี)', 1, 100, 1)
-    เพศ = st.selectbox('เพศ',('ชาย','หญิง'))
-    อาการเจ็บหน้าอก(cp) = st.selectbox('เพศ',('ไม่มีอาการ','หญิง'))
+    อายุ:Age = st.slider('อายุ(ปี)', 1, 100, 1)
+    เพศ:Sex = st.selectbox('เพศ',('ชาย','หญิง'))
+    อาการเจ็บหน้าอก:cp = st.selectbox('เพศ',('ไม่มีอาการ','หญิง'))
 
 
 
