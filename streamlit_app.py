@@ -96,7 +96,7 @@ with st.sidebar:
 
     if st.button("❤️ ทำนายผล"):
 
-    prediction = model.predict(input_df)
+        prediction = model.predict(input_df)
 
     if prediction[0] == 1:
         st.error("⚠️ ผลทำนาย : มีความเสี่ยงโรคหัวใจ")
