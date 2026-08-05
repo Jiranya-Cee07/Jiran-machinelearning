@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier
 
 # -------------------------------
 # ตั้งค่าหน้าเว็บ
@@ -77,6 +78,12 @@ with tab2:
 st.subheader("📈 สถิติพื้นฐานของข้อมูล")
 st.write(dt.describe())
 
+X = dt.drop("target", axis=1)
+y = dt["target"]
+
+model = RandomForestClassifier(random_state=42)
+model.fit(X, y)
+
 with st.sidebar:
     st.header('รับข้อมูล')
     Age = st.slider('อายุ(Age)', 1, 100, 1)
@@ -93,6 +100,45 @@ with st.sidebar:
     ca = st.selectbox('จำนวนหลอดเลือดหัวใจหลัก ที่ตรวจพบด้วยการฉีดสี มีค่า 0–3(ca)',('0','1','2','3'))
     thal = st.selectbox('ผลการตรวจ Thalassemia/Thallium Stress Test(thal)',('ข้อมูลผิดพลาดหรือไม่มีข้อมูล','ผิดปกติแบบคงที่','ปกติ (Normal)','ผิดปกติที่สามารถกลับคืนได้ (Reversible Defect)'))
     
+
+Sex = 1 if Sex == "ชาย" else 0
+
+
+cp = {
+    'เจ็บหน้าอกปกติ': 0,
+    'เจ็บหน้าอกผิดปกติ': 1,
+    'เจ็บหน้าอกที่ไม่ได้เกิดจากโรคหลอดเลือดหัวใจ': 2,
+    'ไม่มีอาการ': 3
+}[cp]
+
+
+fbs = 1 if fbs == 'มากกว่า 120 mg/dL' else 0
+
+
+restecg = {
+    'ปกติ': 0,
+    'มีความผิดปกติของคลื่น ST-T': 1,
+    'มีภาวะหัวใจห้องล่างซ้ายโต ตามเกณฑ์ของ Estes': 2
+}[restecg]
+
+
+exang = 1 if exang == 'มี' else 0
+
+
+slope = {
+    'ชันขึ้น (Upsloping)': 0,
+    'ราบ (Flat)': 1,
+    'ชันลง (Downsloping)': 2
+}[slope]
+
+
+thal = {
+    'ข้อมูลผิดพลาดหรือไม่มีข้อมูล': 0,
+    'ผิดปกติแบบคงที่': 1,
+    'ปกติ (Normal)': 2,
+    'ผิดปกติที่สามารถกลับคืนได้ (Reversible Defect)': 3
+}[thal]
+    
     # Create a DataFrame for the input features
     data = {'Age': Age,
           'Sex': Sex,
@@ -107,18 +153,20 @@ with st.sidebar:
            'slope': slope,
           'ca': ca,
           'thal': thal}
-    input_df = pd.DataFrame(data, index=[0])
-    target = pd.concat([input_df, X_raw], axis=0)
 
-with st.expander('Input features'):
-  st.write('**Input penguin**')
-  input_df
-  st.write('**Combined penguins data**')
-  target
-    
-    
+# แสดงข้อมูลที่ส่งเข้าโมเดล
+st.subheader("📋 Input Data")
+st.dataframe(data)
 
+if st.button("❤️ ทำนายผล"):
 
+    prediction = model.predict(input_df)
+
+    if prediction[0] == 1:
+        st.error("⚠️ ผลทำนาย : มีความเสี่ยงโรคหัวใจ")
+
+    else:
+        st.success("✅ ผลทำนาย : ไม่มีความเสี่ยงโรคหัวใจ")
 
 
 
