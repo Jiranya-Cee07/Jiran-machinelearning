@@ -94,7 +94,7 @@ with st.sidebar:
     thal = st.selectbox('ผลการตรวจ Thalassemia/Thallium Stress Test(thal)',('ข้อมูลผิดพลาดหรือไม่มีข้อมูล','ผิดปกติแบบคงที่','ปกติ (Normal)','ผิดปกติที่สามารถกลับคืนได้ (Reversible Defect)'))
     
 
-     predict_btn = st.button("❤️ ทำนายผล"):
+    predict_btn = st.button("❤️ ทำนายผล"):
 
 
 
