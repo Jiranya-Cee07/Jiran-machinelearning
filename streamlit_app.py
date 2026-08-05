@@ -87,10 +87,7 @@ with st.sidebar:
     thalach = st.slider('อัตราการเต้นของหัวใจสูงสุดที่วัดได้(thalach)', 1, 250, 1)
     exang = st.selectbox('อาการเจ็บหน้าอกจากการออกกำลังกาย(exang)',('มี','ไม่มี'))
     oldpeak = st.slider('ระดับการลดลงของช่วง ST ที่เกิดจากการออกกำลังกายเมื่อเทียบกับขณะพัก(oldpeak)', 0.0, 10.00, 0.0)
-    slope = 
-    ca = 
-    thal = 
-    target = 
+    
     
     
 
