@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from sklearn.ensemble import RandomForestClassifier
 
 # -------------------------------
 # ตั้งค่าหน้าเว็บ
@@ -107,6 +109,13 @@ with st.sidebar:
           'thal': thal}
     input_df = pd.DataFrame(data, index=[0])
     target = pd.concat([input_df, X_raw], axis=0)
+
+with st.expander('Input features'):
+  st.write('**Input penguin**')
+  input_df
+  st.write('**Combined penguins data**')
+  target
+    
     
 
 
