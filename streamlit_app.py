@@ -96,7 +96,7 @@ with st.sidebar:
     exang = st.selectbox('อาการเจ็บหน้าอกจากการออกกำลังกาย(exang)',('มี','ไม่มี'))
     oldpeak = st.slider('ระดับการลดลงของช่วง ST ที่เกิดจากการออกกำลังกายเมื่อเทียบกับขณะพัก(oldpeak)', 0.0, 10.00, 6.0)
     slope =  st.selectbox('ลักษณะความชันของช่วง ST ขณะออกกำลังกายสูงสุด(slope)',('ชันขึ้น (Upsloping)','ราบ (Flat)','ชันลง (Downsloping)'))
-    ca = st.selectbox('จำนวนหลอดเลือดหัวใจหลัก ที่ตรวจพบด้วยการฉีดสี มีค่า 0–3(ca)',('0','1','2','3'))
+    ca = st.selectbox('จำนวนหลอดเลือดหัวใจหลัก ที่ตรวจพบด้วยการฉีดสี มีค่า 0–3(ca)',(0,1,2,3))
     thal = st.selectbox('ผลการตรวจ Thalassemia/Thallium Stress Test(thal)',('ข้อมูลผิดพลาดหรือไม่มีข้อมูล','ผิดปกติแบบคงที่','ปกติ (Normal)','ผิดปกติที่สามารถกลับคืนได้ (Reversible Defect)'))
     
 
@@ -158,7 +158,7 @@ data = {
     'exang': exang,
     'oldpeak': oldpeak,
     'slope': slope,
-    'ca': int(ca),
+    'ca': ca,
     'thal': thal
 }
 
