@@ -77,6 +77,12 @@ with tab2:
 st.subheader("📈 สถิติพื้นฐานของข้อมูล")
 st.write(dt.describe())
 
+X = dt.drop("target", axis=1)
+y = dt["target"]
+
+model = RandomForestClassifier(random_state=42)
+model.fit(X, y)
+
 with st.sidebar:
     st.header('รับข้อมูล')
     Age = st.slider('อายุ(Age)', 1, 100, 1)
