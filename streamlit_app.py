@@ -54,20 +54,65 @@ with tab1:
 with tab2:
 
     st.markdown("""
-| **ชื่อตัวแปร** | **ความหมาย** |
-|:---|:---|
-| **age** | อายุ (ปี) |
-| **sex** | เพศ<br>**1 = ชาย**<br>**0 = หญิง** |
-| **cp** | ประเภทของอาการเจ็บหน้าอก<br>0 = Typical Angina<br>1 = Atypical Angina<br>2 = Non-anginal Pain<br>3 = Asymptomatic |
-| **trestbps** | ความดันโลหิตขณะพัก (mmHg) |
-| **chol** | ระดับคอเลสเตอรอลในเลือด (mg/dL) |
-| **fbs** | ระดับน้ำตาลในเลือดหลังอดอาหาร<br>1 = มากกว่า 120 mg/dL<br>0 = ไม่เกิน 120 mg/dL |
-| **restecg** | ผลตรวจคลื่นไฟฟ้าหัวใจขณะพัก |
-| **thalach** | อัตราการเต้นของหัวใจสูงสุด |
-| **exang** | อาการเจ็บหน้าอกจากการออกกำลังกาย<br>1 = มี<br>0 = ไม่มี |
-| **oldpeak** | ระดับ ST Depression จากการออกกำลังกาย |
-| **slope** | ความชันของช่วง ST<br>0 = Upsloping<br>1 = Flat<br>2 = Downsloping |
-| **ca** | จำนวนหลอดเลือดหัวใจหลัก (0–3) |
-| **thal** | 0 = Error<br>1 = Fixed Defect<br>2 = Normal<br>3 = Reversible Defect |
-| **target** | **0 = ไม่เป็นโรคหัวใจ**<br>**1 = เป็นโรคหัวใจ** |
-""", unsafe_allow_html=True)
+    <style>
+    .note-table{
+        width:75%;
+        margin:auto;
+        border-collapse:collapse;
+        font-size:14px;
+    }
+
+    .note-table th{
+        background:#f2f2f2;
+        text-align:center;
+        padding:10px;
+        border:1px solid #ddd;
+    }
+
+    .note-table td{
+        padding:10px;
+        border:1px solid #ddd;
+        vertical-align:top;
+    }
+
+    .note-table td:first-child{
+        width:120px;
+        font-weight:bold;
+    }
+    </style>
+
+    <table class="note-table">
+        <tr>
+            <th>ชื่อตัวแปร</th>
+            <th>ความหมาย</th>
+        </tr>
+
+        <tr>
+            <td>age</td>
+            <td>อายุ (ปี)</td>
+        </tr>
+
+        <tr>
+            <td>sex</td>
+            <td>
+                เพศ<br>
+                1 = ชาย<br>
+                0 = หญิง
+            </td>
+        </tr>
+
+        <tr>
+            <td>cp</td>
+            <td>
+                ประเภทของอาการเจ็บหน้าอก<br>
+                0 = Typical Angina<br>
+                1 = Atypical Angina<br>
+                2 = Non-anginal Pain<br>
+                3 = Asymptomatic
+            </td>
+        </tr>
+
+        <!-- เพิ่มแถวอื่น ๆ ต่อได้ -->
+
+    </table>
+    """, unsafe_allow_html=True)
