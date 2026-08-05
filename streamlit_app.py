@@ -78,6 +78,7 @@ st.write(dt.describe())
 with st.sidebar:
     st.header('รับข้อมูล')
     Age: อายุ = st.slider('Age(years)', 1, 100, 1)
+    Sex: เพศ = st.selectbox('Sex',('ชาย','หญิง'))
 
 
 
