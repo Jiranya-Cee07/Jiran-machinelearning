@@ -91,7 +91,22 @@ with st.sidebar:
     ca = st.selectbox('จำนวนหลอดเลือดหัวใจหลัก ที่ตรวจพบด้วยการฉีดสี มีค่า 0–3(ca)',('0','1','2','3'))
     thal = st.selectbox('ผลการตรวจ Thalassemia/Thallium Stress Test(thal)',('ข้อมูลผิดพลาดหรือไม่มีข้อมูล','ผิดปกติแบบคงที่','ปกติ (Normal)','ผิดปกติที่สามารถกลับคืนได้ (Reversible Defect)'))
     
-    
+    # Create a DataFrame for the input features
+    data = {'Age': Age,
+          'Sex': Sex,
+          'cp': cp,
+          'trestbps': trestbps,
+          'chol': chol,
+          'fbs': fbs,
+           'restecg': restecg,
+          'thalach': thalach,
+          'exang': exang,
+          'oldpeak': oldpeak,
+           'slope': slope,
+          'ca': ca,
+          'thal': thal}
+    input_df = pd.DataFrame(data, index=[0])
+    target = pd.concat([input_df, X_raw], axis=0)
     
 
 
