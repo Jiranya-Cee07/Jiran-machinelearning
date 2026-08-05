@@ -74,3 +74,24 @@ with tab2:
 # สถิติพื้นฐาน
 st.subheader("📈 สถิติพื้นฐานของข้อมูล")
 st.write(dt.describe())
+
+with st.sidebar:
+    st.header('รับข้อมูล')
+    Age: อายุ = st.slider('Age(years)', 1, 100, 1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
