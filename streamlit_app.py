@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.ensemble import RandomForestClassifier
 
 # -------------------------------
 # ตั้งค่าหน้าเว็บ
@@ -139,24 +138,38 @@ thal = {
     'ผิดปกติที่สามารถกลับคืนได้ (Reversible Defect)': 3
 }[thal]
     
-    # Create a DataFrame for the input features
-    data = {'Age': Age,
-          'Sex': Sex,
-          'cp': cp,
-          'trestbps': trestbps,
-          'chol': chol,
-          'fbs': fbs,
-           'restecg': restecg,
-          'thalach': thalach,
-          'exang': exang,
-          'oldpeak': oldpeak,
-           'slope': slope,
-          'ca': ca,
-          'thal': thal}
+    # -------------------------------
+# สร้าง DataFrame สำหรับส่งเข้าโมเดล
+# -------------------------------
+
+data = {
+    'age': Age,
+    'sex': Sex,
+    'cp': cp,
+    'trestbps': trestbps,
+    'chol': chol,
+    'fbs': fbs,
+    'restecg': restecg,
+    'thalach': thalach,
+    'exang': exang,
+    'oldpeak': oldpeak,
+    'slope': slope,
+    'ca': int(ca),
+    'thal': thal
+}
+
+
+input_df = pd.DataFrame([data])
+
 
 # แสดงข้อมูลที่ส่งเข้าโมเดล
 st.subheader("📋 Input Data")
-st.dataframe(data)
+st.dataframe(input_df)
+
+
+# -------------------------------
+# ทำนายผล
+# -------------------------------
 
 if st.button("❤️ ทำนายผล"):
 
@@ -167,7 +180,6 @@ if st.button("❤️ ทำนายผล"):
 
     else:
         st.success("✅ ผลทำนาย : ไม่มีความเสี่ยงโรคหัวใจ")
-
 
 
 
