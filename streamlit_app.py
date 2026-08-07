@@ -134,72 +134,72 @@ model.fit(X, y)
 
 with st.sidebar:
     st.header('รับข้อมูล')
-    Age = st.slider('อายุ(Age)', 1, 100, 1)
-    Sex = st.selectbox('เพศ(Sex)',('ชาย','หญิง'))
-    cp = st.selectbox('อาการเจ็บหน้าอก(cp)',('เจ็บหน้าอกปกติ','เจ็บหน้าอกผิดปกติ','เจ็บหน้าอกที่ไม่ได้เกิดจากโรคหลอดเลือดหัวใจ','ไม่มีอาการ'))
-    trestbps =  st.slider('ความดันโลหิตขณะพัก(mmHg)(trestbps)', 1, 200, 50)
-    chol = st.slider('ระดับคอเลสเตอรอลในเลือด(mg/dL)(chol)', 1, 500, 150)
-    fbs = st.selectbox('ระดับน้ำตาลในเลือดหลังอดอาหาร(fbs)',('มากกว่า 120 mg/dL','ไม่เกิน 120 mg/dL'))
-    restecg = st.selectbox('ผลการตรวจคลื่นไฟฟ้าหัวใจขณะพัก(restecg)',('ปกติ','มีความผิดปกติของคลื่น ST-T','มีภาวะหัวใจห้องล่างซ้ายโต ตามเกณฑ์ของ Estes'))
-    thalach = st.slider('อัตราการเต้นของหัวใจสูงสุดที่วัดได้(thalach)', 1, 250, 100)
-    exang = st.selectbox('อาการเจ็บหน้าอกจากการออกกำลังกาย(exang)',('มี','ไม่มี'))
-    oldpeak = st.slider('ระดับการลดลงของช่วง ST ที่เกิดจากการออกกำลังกายเมื่อเทียบกับขณะพัก(oldpeak)', 0.0, 10.00, 6.0)
-    slope =  st.selectbox('ลักษณะความชันของช่วง ST ขณะออกกำลังกายสูงสุด(slope)',('ชันขึ้น (Upsloping)','ราบ (Flat)','ชันลง (Downsloping)'))
-    ca = st.selectbox('จำนวนหลอดเลือดหัวใจหลัก ที่ตรวจพบด้วยการฉีดสี มีค่า 0–3(ca)',(0,1,2,3))
-    thal = st.selectbox('ผลการตรวจ Thalassemia/Thallium Stress Test(thal)',('ข้อมูลผิดพลาดหรือไม่มีข้อมูล','ผิดปกติแบบคงที่','ปกติ (Normal)','ผิดปกติที่สามารถกลับคืนได้ (Reversible Defect)'))
+        Age = st.slider('อายุ(Age)', 1, 100, 1)
+        Sex = st.selectbox('เพศ(Sex)',('ชาย','หญิง'))
+        cp = st.selectbox('อาการเจ็บหน้าอก(cp)',('เจ็บหน้าอกปกติ','เจ็บหน้าอกผิดปกติ','เจ็บหน้าอกที่ไม่ได้เกิดจากโรคหลอดเลือดหัวใจ','ไม่มีอาการ'))
+        trestbps =  st.slider('ความดันโลหิตขณะพัก(mmHg)(trestbps)', 1, 200, 50)
+        chol = st.slider('ระดับคอเลสเตอรอลในเลือด(mg/dL)(chol)', 1, 500, 150)
+        fbs = st.selectbox('ระดับน้ำตาลในเลือดหลังอดอาหาร(fbs)',('มากกว่า 120 mg/dL','ไม่เกิน 120 mg/dL'))
+        restecg = st.selectbox('ผลการตรวจคลื่นไฟฟ้าหัวใจขณะพัก(restecg)',('ปกติ','มีความผิดปกติของคลื่น ST-T','มีภาวะหัวใจห้องล่างซ้ายโต ตามเกณฑ์ของ Estes'))
+        thalach = st.slider('อัตราการเต้นของหัวใจสูงสุดที่วัดได้(thalach)', 1, 250, 100)
+        exang = st.selectbox('อาการเจ็บหน้าอกจากการออกกำลังกาย(exang)',('มี','ไม่มี'))
+        oldpeak = st.slider('ระดับการลดลงของช่วง ST ที่เกิดจากการออกกำลังกายเมื่อเทียบกับขณะพัก(oldpeak)', 0.0, 10.00, 6.0)
+        slope =  st.selectbox('ลักษณะความชันของช่วง ST ขณะออกกำลังกายสูงสุด(slope)',('ชันขึ้น (Upsloping)','ราบ (Flat)','ชันลง (Downsloping)'))
+        ca = st.selectbox('จำนวนหลอดเลือดหัวใจหลัก ที่ตรวจพบด้วยการฉีดสี มีค่า 0–3(ca)',(0,1,2,3))
+        thal = st.selectbox('ผลการตรวจ Thalassemia/Thallium Stress Test(thal)',('ข้อมูลผิดพลาดหรือไม่มีข้อมูล','ผิดปกติแบบคงที่','ปกติ (Normal)','ผิดปกติที่สามารถกลับคืนได้ (Reversible Defect)'))
     
 
-Sex = 1 if Sex == "ชาย" else 0
+    Sex = 1 if Sex == "ชาย" else 0
 
-cp = {
-    'เจ็บหน้าอกปกติ': 0,
-    'เจ็บหน้าอกผิดปกติ': 1,
-    'เจ็บหน้าอกที่ไม่ได้เกิดจากโรคหลอดเลือดหัวใจ': 2,
-    'ไม่มีอาการ': 3
-}[cp]
+    cp = {
+        'เจ็บหน้าอกปกติ': 0,
+        'เจ็บหน้าอกผิดปกติ': 1,
+        'เจ็บหน้าอกที่ไม่ได้เกิดจากโรคหลอดเลือดหัวใจ': 2,
+        'ไม่มีอาการ': 3
+    }[cp]
 
-fbs = 1 if fbs == 'มากกว่า 120 mg/dL' else 0
+    fbs = 1 if fbs == 'มากกว่า 120 mg/dL' else 0
 
-restecg = {
-    'ปกติ': 0,
-    'มีความผิดปกติของคลื่น ST-T': 1,
-    'มีภาวะหัวใจห้องล่างซ้ายโต ตามเกณฑ์ของ Estes': 2
-}[restecg]
+    restecg = {
+        'ปกติ': 0,
+        'มีความผิดปกติของคลื่น ST-T': 1,
+        'มีภาวะหัวใจห้องล่างซ้ายโต ตามเกณฑ์ของ Estes': 2
+    }[restecg]
 
-exang = 1 if exang == 'มี' else 0
+    exang = 1 if exang == 'มี' else 0
 
-slope = {
-    'ชันขึ้น (Upsloping)': 0,
-    'ราบ (Flat)': 1,
-    'ชันลง (Downsloping)': 2
-}[slope]
+    slope = {
+        'ชันขึ้น (Upsloping)': 0,
+        'ราบ (Flat)': 1,
+        'ชันลง (Downsloping)': 2
+    }[slope]
 
-thal = {
-    'ข้อมูลผิดพลาดหรือไม่มีข้อมูล': 0,
-    'ผิดปกติแบบคงที่': 1,
-    'ปกติ (Normal)': 2,
-    'ผิดปกติที่สามารถกลับคืนได้ (Reversible Defect)': 3
-}[thal]
+    thal = {
+        'ข้อมูลผิดพลาดหรือไม่มีข้อมูล': 0,
+        'ผิดปกติแบบคงที่': 1,
+        'ปกติ (Normal)': 2,
+        'ผิดปกติที่สามารถกลับคืนได้ (Reversible Defect)': 3
+    }[thal]
 
         # -------------------------------
 # สร้าง DataFrame สำหรับส่งเข้าโมเดล
 # -------------------------------
 
-data = {
-    'age': Age,
-    'sex': Sex,
-    'cp': cp,
-    'trestbps': trestbps,
-    'chol': chol,
-    'fbs': fbs,
-    'restecg': restecg,
-    'thalach': thalach,
-    'exang': exang,
-    'oldpeak': oldpeak,
-    'slope': slope,
-    'ca': ca,
-    'thal': thal
-}
+    data = {
+        'age': Age,
+        'sex': Sex,
+        'cp': cp,
+        'trestbps': trestbps,
+        'chol': chol,
+        'fbs': fbs,
+        'restecg': restecg,
+        'thalach': thalach,
+        'exang': exang,
+        'oldpeak': oldpeak,
+        'slope': slope,
+        'ca': ca,
+        'thal': thal
+    }
 
 predict_btn = st.button("❤️ ทำนายผล")
 
