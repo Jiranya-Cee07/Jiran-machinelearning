@@ -16,16 +16,6 @@ st.set_page_config(
 # -------------------------------
 dt = pd.read_csv("./data/heart.csv")
 
-X = dt.drop("target", axis=1)
-y = dt["target"]
-
-model = RandomForestClassifier(
-    n_estimators=100,
-    random_state=42
-)
-
-model.fit(X, y)
-
 # -------------------------------
 # ส่วนหัว
 # -------------------------------
@@ -134,6 +124,16 @@ with st.sidebar:
         'ปกติ (Normal)': 2,
         'ผิดปกติที่สามารถกลับคืนได้ (Reversible Defect)': 3
     }[thal]
+
+    X = dt.drop("target", axis=1)
+y = dt["target"]
+
+model = RandomForestClassifier(
+    n_estimators=100,
+    random_state=42
+)
+
+model.fit(X, y)
 
         # -------------------------------
 # สร้าง DataFrame สำหรับส่งเข้าโมเดล
