@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import RandomForestClassifier
-
 # -------------------------------
 # ตั้งค่าหน้าเว็บ
 # -------------------------------
@@ -16,6 +15,16 @@ st.set_page_config(
 # โหลดข้อมูล
 # -------------------------------
 dt = pd.read_csv("./data/heart.csv")
+
+X = dt.drop("target", axis=1)
+y = dt["target"]
+
+model = RandomForestClassifier(
+    n_estimators=100,
+    random_state=42
+)
+
+model.fit(X, y)
 
 # -------------------------------
 # ส่วนหัว
