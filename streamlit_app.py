@@ -174,7 +174,7 @@ with st.sidebar:
 
         if prediction[0] == 1:
             st.error("⚠️ มีความเสี่ยงโรคหัวใจ")
-         else:
+        else:
             st.success("✅ ไม่มีความเสี่ยงโรคหัวใจ")
 
 
