@@ -16,6 +16,13 @@ st.set_page_config(
 # -------------------------------
 dt = pd.read_csv("./data/heart.csv")
 
+# แปลงข้อมูลข้อความเป็นตัวเลข
+le = LabelEncoder()
+
+for col in dt.columns:
+    if dt[col].dtype == "object":
+        dt[col] = le.fit_transform(dt[col])
+        
 X = dt.drop("target", axis=1)
 y = dt["target"]
 
