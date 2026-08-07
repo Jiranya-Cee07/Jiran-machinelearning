@@ -99,6 +99,12 @@ st.write(dt.describe(include="all"))
 st.subheader("📌 เลือกฟีเจอร์เพื่อดูการกระจายข้อมูล")
 feature = st.selectbox("เลือกฟีเจอร์", dt.columns[:-1])
 
+# วาดกราฟ boxplot
+st.write(f"### 🎯 Boxplot: {feature} แยกตามชนิดของเป็นโรคหัวใจ/ไม่เป็นโรคหัวใจ")
+fig, ax = plt.subplots()
+sns.boxplot(data=dt, x='HeartDisease', y=feature, ax=ax)
+st.pyplot(fig)
+
 with st.sidebar:
     st.header('รับข้อมูล')
     Age = st.slider('อายุ(Age)', 1, 100, 20)
