@@ -120,14 +120,25 @@ dt["thal"] = dt["thal"].replace({
     "ผิดปกติที่สามารถกลับคืนได้ (Reversible Defect)": 3
 })
 
-# แปลงทุกคอลัมน์เป็นตัวเลข
+# แปลงข้อมูลทั้งหมดเป็นตัวเลข
 dt = dt.apply(pd.to_numeric, errors="coerce")
 
-# ลบข้อมูลที่แปลงไม่ได้
+# ลบแถวที่มีค่าว่าง
 dt.dropna(inplace=True)
 
 X = dt.drop("target", axis=1)
 y = dt["target"]
+
+# ตรวจสอบข้อมูลก่อน train
+st.write("ชนิดข้อมูล")
+st.write(X.dtypes)
+
+st.write("ข้อมูลว่าง")
+st.write(X.isnull().sum())
+
+st.write("ตัวอย่างข้อมูล")
+st.write(X.head())
+
 
 model = RandomForestClassifier(random_state=42)
 model.fit(X, y)
