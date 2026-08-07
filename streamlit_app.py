@@ -201,7 +201,7 @@ data = {
     'thal': thal
 }
 
-    predict_btn = st.button("❤️ ทำนายผล")
+predict_btn = st.button("❤️ ทำนายผล")
 
     
 
