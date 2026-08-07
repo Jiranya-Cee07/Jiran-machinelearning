@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import RandomForestClassifier
+import matplotlib.pyplot as plt
 # -------------------------------
 # ตั้งค่าหน้าเว็บ
 # -------------------------------
