@@ -166,17 +166,16 @@ with st.sidebar:
     predict_btn = st.button("❤️ ทำนายผล")
 
     
+    input_df = pd.DataFrame([data])
 
-input_df = pd.DataFrame([data])
+    if predict_btn:
 
-if predict_btn:
+        prediction = model.predict(input_df)
 
-    prediction = model.predict(input_df)
-
-    if prediction[0] == 1:
-        st.error("⚠️ มีความเสี่ยงโรคหัวใจ")
-    else:
-        st.success("✅ ไม่มีความเสี่ยงโรคหัวใจ")
+        if prediction[0] == 1:
+            st.error("⚠️ มีความเสี่ยงโรคหัวใจ")
+         else:
+            st.success("✅ ไม่มีความเสี่ยงโรคหัวใจ")
 
 
 
