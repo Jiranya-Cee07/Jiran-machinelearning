@@ -97,7 +97,7 @@ st.subheader("📈 สถิติพื้นฐานของข้อมู�
 st.write(dt.describe(include="all"))
 
 with st.sidebar:
-    st.header('รับข้อมูล')
+    st.header('ทำนายความเสี่ยง')
     Age = st.slider('อายุ(Age)', 1, 100, 20)
     Sex = st.selectbox('เพศ(Sex)',('ชาย','หญิง'))
     cp = st.selectbox('อาการเจ็บหน้าอก(cp)',('เจ็บหน้าอกปกติ','เจ็บหน้าอกผิดปกติ','เจ็บหน้าอกที่ไม่ได้เกิดจากโรคหลอดเลือดหัวใจ','ไม่มีอาการ'))
