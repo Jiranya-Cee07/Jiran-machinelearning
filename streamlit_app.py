@@ -95,6 +95,10 @@ with tab2:
 st.subheader("📈 สถิติพื้นฐานของข้อมูล")
 st.write(dt.describe(include="all"))
 
+# การเลือกแสดงกราฟตามฟีเจอร์
+st.subheader("📌 เลือกฟีเจอร์เพื่อดูการกระจายข้อมูล")
+feature = st.selectbox("เลือกฟีเจอร์", dt.columns[:-1])
+
 with st.sidebar:
     st.header('รับข้อมูล')
     Age = st.slider('อายุ(Age)', 1, 100, 20)
