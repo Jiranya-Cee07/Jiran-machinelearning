@@ -16,15 +16,17 @@ st.set_page_config(
 # -------------------------------
 dt = pd.read_csv("./data/heart.csv")
 
+train_dt = dt.copy()
+
 # แปลงข้อมูลข้อความเป็นตัวเลข
 le = LabelEncoder()
 
-for col in dt.columns:
-    if dt[col].dtype == "object":
-        dt[col] = le.fit_transform(dt[col])
+for col in train_dt.columns:
+    if train_dt[col].dtype == "object":
+        train_dt[col] = le.fit_transform(train_dt[col])
         
-X = dt.drop("target", axis=1)
-y = dt["target"]
+X = train_dt.drop("target", axis=1)
+y = train_dt["target"]
 
 model = RandomForestClassifier(
     n_estimators=100,
@@ -91,7 +93,7 @@ with tab2:
 
 # สถิติพื้นฐาน
 st.subheader("📈 สถิติพื้นฐานของข้อมูล")
-st.write(dt.describe())
+st.write(dt.describe(include="all"))
 
 with st.sidebar:
     st.header('รับข้อมูล')
