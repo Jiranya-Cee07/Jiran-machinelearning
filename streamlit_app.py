@@ -181,7 +181,152 @@ with st.sidebar:
             st.success("✅ ไม่มีความเสี่ยงโรคหัวใจ")
 
 
+# -------------------------------
+วิเคราะห์ Pattern
+# -------------------------------
 
+    st.subheader("🔎 วิเคราะห์ Pattern ของผู้ที่เป็นโรคหัวใจ")
+
+    st.write("""
+    ระบบจะวิเคราะห์ความแตกต่างระหว่างผู้ที่ไม่เป็นโรคหัวใจ
+    (target = 0) และผู้ที่เป็นโรคหัวใจ (target = 1)
+    เพื่อค้นหาแนวโน้มและลักษณะร่วมของข้อมูล
+    """)
+
+    # แบ่งข้อมูลตาม Target
+    no_disease = dt[dt["target"] == 0]
+    disease = dt[dt["target"] == 1]
+
+    # จำนวนข้อมูล
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.metric(
+            "ไม่เป็นโรคหัวใจ",
+            f"{len(no_disease):,} คน"
+        )
+
+    with col2:
+        st.metric(
+            "เป็นโรคหัวใจ",
+            f"{len(disease):,} คน"
+        )
+
+    st.divider()
+
+    # -------------------------------
+    # เปรียบเทียบค่าเฉลี่ย
+    # -------------------------------
+
+    st.subheader("📊 เปรียบเทียบค่าเฉลี่ย")
+
+    numeric_cols = [
+        "age",
+        "trestbps",
+        "chol",
+        "thalach",
+        "oldpeak"
+    ]
+
+    comparison = pd.DataFrame({
+        "ไม่เป็นโรคหัวใจ (0)": no_disease[numeric_cols].mean(),
+        "เป็นโรคหัวใจ (1)": disease[numeric_cols].mean()
+    })
+
+    comparison["ความแตกต่าง"] = (
+        comparison["เป็นโรคหัวใจ (1)"]
+        - comparison["ไม่เป็นโรคหัวใจ (0)"]
+    )
+
+    st.dataframe(
+        comparison.round(2),
+        use_container_width=True
+    )
+
+    st.divider()
+
+    # -------------------------------
+    # Correlation
+    # -------------------------------
+
+    st.subheader("📈 ความสัมพันธ์กับ HeartDisease")
+
+    correlation = (
+        dt[numeric_cols + ["target"]]
+        .corr()["target"]
+        .drop("target")
+        .sort_values(ascending=False)
+    )
+
+    st.bar_chart(correlation)
+
+    st.write("ค่าที่เป็นบวก แสดงความสัมพันธ์ในทิศทางเดียวกับ target")
+    st.write("ค่าที่เป็นลบ แสดงความสัมพันธ์ในทิศทางตรงข้ามกับ target")
+
+    st.divider()
+
+    # -------------------------------
+    # Pattern ของ Exercise Angina
+    # -------------------------------
+
+    st.subheader("🏃 Pattern : Exercise Angina")
+
+    exang_pattern = pd.crosstab(
+        dt["exang"],
+        dt["target"],
+        normalize="index"
+    ) * 100
+
+    exang_pattern.columns = [
+        "ไม่เป็นโรคหัวใจ (%)",
+        "เป็นโรคหัวใจ (%)"
+    ]
+
+    exang_pattern.index = [
+        "ไม่มีอาการเจ็บหน้าอกจากการออกกำลังกาย",
+        "มีอาการเจ็บหน้าอกจากการออกกำลังกาย"
+    ]
+
+    st.dataframe(
+        exang_pattern.round(2),
+        use_container_width=True
+    )
+
+    st.bar_chart(exang_pattern)
+
+    st.divider()
+
+    # -------------------------------
+    # สรุป Pattern
+    # -------------------------------
+
+    st.subheader("💡 สรุป Pattern ที่พบ")
+
+    for feature in comparison.index:
+
+        no_value = comparison.loc[
+            feature,
+            "ไม่เป็นโรคหัวใจ (0)"
+        ]
+
+        disease_value = comparison.loc[
+            feature,
+            "เป็นโรคหัวใจ (1)"
+        ]
+
+        if disease_value > no_value:
+            st.write(
+                f"• {feature}: "
+                f"กลุ่มที่เป็นโรคหัวใจมีค่าเฉลี่ยสูงกว่า "
+                f"({disease_value:.2f} เทียบกับ {no_value:.2f})"
+            )
+
+        elif disease_value < no_value:
+            st.write(
+                f"• {feature}: "
+                f"กลุ่มที่เป็นโรคหัวใจมีค่าเฉลี่ยต่ำกว่า "
+                f"({disease_value:.2f} เทียบกับ {no_value:.2f})"
+            )
 
 
 
