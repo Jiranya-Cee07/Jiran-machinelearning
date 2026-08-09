@@ -228,10 +228,32 @@ with st.sidebar:
         "oldpeak"
     ]
 
-    comparison = pd.DataFrame({
-        "ไม่เป็นโรคหัวใจ (0)": no_disease[numeric_cols].mean(),
-        "เป็นโรคหัวใจ (1)": disease[numeric_cols].mean()
-    })
+    # แปลงคอลัมน์ที่ใช้วิเคราะห์ให้เป็นตัวเลข
+analysis_dt = dt.copy()
+
+for col in numeric_cols:
+    analysis_dt[col] = pd.to_numeric(
+        analysis_dt[col],
+        errors="coerce"
+    )
+
+no_disease = analysis_dt[analysis_dt["target"] == 0]
+disease = analysis_dt[analysis_dt["target"] == 1]
+
+comparison = pd.DataFrame({
+    "ไม่เป็นโรคหัวใจ (0)": no_disease[numeric_cols].mean(),
+    "เป็นโรคหัวใจ (1)": disease[numeric_cols].mean()
+})
+
+comparison["ความแตกต่าง"] = (
+    comparison["เป็นโรคหัวใจ (1)"]
+    - comparison["ไม่เป็นโรคหัวใจ (0)"]
+)
+
+st.dataframe(
+    comparison.round(2),
+    use_container_width=True
+)
 
     comparison["ความแตกต่าง"] = (
         comparison["เป็นโรคหัวใจ (1)"]
@@ -245,57 +267,45 @@ with st.sidebar:
 
     st.divider()
 
-    # -------------------------------
-    # Correlation
-    # -------------------------------
+   # -------------------------------
+# Correlation
+# -------------------------------
 
-    st.subheader("📈 ความสัมพันธ์กับ HeartDisease")
+st.subheader("📈 ความสัมพันธ์กับ HeartDisease")
 
-    correlation = (
-        dt[numeric_cols + ["target"]]
-        .corr()["target"]
-        .drop("target")
-        .sort_values(ascending=False)
+correlation_cols = [
+    "age",
+    "trestbps",
+    "chol",
+    "thalach",
+    "oldpeak",
+    "target"
+]
+
+# แปลงข้อมูลเป็นตัวเลข
+corr_dt = dt[correlation_cols].copy()
+
+for col in correlation_cols:
+    corr_dt[col] = pd.to_numeric(
+        corr_dt[col],
+        errors="coerce"
     )
 
-    st.bar_chart(correlation)
+# ลบแถวที่มีค่าว่าง
+corr_dt = corr_dt.dropna()
 
-    st.write("ค่าที่เป็นบวก แสดงความสัมพันธ์ในทิศทางเดียวกับ target")
-    st.write("ค่าที่เป็นลบ แสดงความสัมพันธ์ในทิศทางตรงข้ามกับ target")
+# คำนวณ Correlation
+correlation = (
+    corr_dt
+    .corr(numeric_only=True)["target"]
+    .drop("target")
+    .sort_values(ascending=False)
+)
 
-    st.divider()
+st.bar_chart(correlation)
 
-    # -------------------------------
-    # Pattern ของ Exercise Angina
-    # -------------------------------
-
-    st.subheader("🏃 Pattern : Exercise Angina")
-
-    exang_pattern = pd.crosstab(
-        dt["exang"],
-        dt["target"],
-        normalize="index"
-    ) * 100
-
-    exang_pattern.columns = [
-        "ไม่เป็นโรคหัวใจ (%)",
-        "เป็นโรคหัวใจ (%)"
-    ]
-
-    exang_pattern.index = [
-        "ไม่มีอาการเจ็บหน้าอกจากการออกกำลังกาย",
-        "มีอาการเจ็บหน้าอกจากการออกกำลังกาย"
-    ]
-
-    st.dataframe(
-        exang_pattern.round(2),
-        use_container_width=True
-    )
-
-    st.bar_chart(exang_pattern)
-
-    st.divider()
-
+st.write("ค่าบวก → มีความสัมพันธ์ในทิศทางเดียวกับ target")
+st.write("ค่าลบ → มีความสัมพันธ์ในทิศทางตรงข้ามกับ target")
     # -------------------------------
     # สรุป Pattern
     # -------------------------------
